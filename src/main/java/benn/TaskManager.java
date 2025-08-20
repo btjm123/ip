@@ -3,7 +3,6 @@ package benn;
 import benn.tasks.Task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TaskManager {
@@ -15,12 +14,20 @@ public class TaskManager {
         return t;
     }
 
-    public List<Task> all() {
-        return Collections.unmodifiableList(tasks);
-    }
-
     public int size() {
         return tasks.size();
+    }
+
+    public Task mark(int index) {
+        Task t = tasks.get(index - 1); // convert to 0-based
+        t.markDone();
+        return t;
+    }
+
+    public Task unmark(int index) {
+        Task t = tasks.get(index - 1);
+        t.markNotDone();
+        return t;
     }
 
     @Override
@@ -31,7 +38,7 @@ public class TaskManager {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            sb.append("     ").append(i + 1).append(". ").append(task.getDescription()).append("\n");
+            sb.append("     ").append(i + 1).append(". ").append(task).append("\n");
         }
         return sb.toString();
     }
