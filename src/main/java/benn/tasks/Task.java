@@ -1,16 +1,12 @@
 package benn.tasks;
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getDescription() {
-        return this.description;
     }
 
     public void markDone() {
@@ -21,11 +17,17 @@ public class Task {
         this.isDone = false;
     }
 
-    @Override
-    public String toString() {
-        String status = isDone ? "[X]" : "[ ]";
-        return status + " " + description;
+    public String getAdditionalDetails() {
+        return "";
     }
 
+    @Override
+    public String toString() {
+        if (isDone) {
+            return String.format("[X] %s", this.description);
+        } else {
+            return String.format("[ ] %s", this.description);
+        }
+    }
 
 }

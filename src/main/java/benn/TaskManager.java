@@ -1,6 +1,9 @@
 package benn;
 
+import benn.tasks.Deadline;
+import benn.tasks.Event;
 import benn.tasks.Task;
+import benn.tasks.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +11,22 @@ import java.util.List;
 public class TaskManager {
     private final List<Task> tasks = new ArrayList<>();
 
-    public Task add(String description) {
-        Task t = new Task(description);
-        tasks.add(t);
-        return t;
+    public Todo addTodo(String description) {
+        Todo todo = new Todo(description);
+        this.tasks.add(todo);
+        return todo;
+    }
+
+    public Deadline addDeadline(String description, String datetimeDue) {
+        Deadline deadline = new Deadline(description, datetimeDue);
+        this.tasks.add(deadline);
+        return deadline;
+    }
+
+    public Event addEvent(String description, String startDateTime, String endDateTime) {
+        Event event = new Event(description, startDateTime, endDateTime);
+        this.tasks.add(event);
+        return event;
     }
 
     public int size() {

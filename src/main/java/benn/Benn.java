@@ -13,6 +13,7 @@ public class Benn {
                         "| |_) |  __/ | | | | | | (_| || || |\n" +
                         "|____/ \\___|_| |_|_| |_|\\__,_||_||_|\n";
 
+        System.out.println(logo);
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm BENN");
         System.out.println(" What can I do for you?");

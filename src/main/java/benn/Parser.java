@@ -5,8 +5,12 @@ import benn.patterns.InputPattern;
 
 public class Parser {
     public static Command parse(String input) {
-        if (input.matches(InputPattern.ADD_ITEM)) {
-            return new AddItemCommand(input);
+        if (input.matches(InputPattern.ADD_TODO)) {
+            return new AddTodoCommand(input);
+        } else if (input.matches(InputPattern.ADD_DEADLINE)) {
+            return new AddDeadlineCommand(input);
+        } else if (input.matches(InputPattern.ADD_EVENT)) {
+            return new AddEventCommand(input);
         } else if (input.matches(InputPattern.LIST)) {
             return new ListCommand(input);
         } else if (input.matches(InputPattern.MARK_TASK)) {
