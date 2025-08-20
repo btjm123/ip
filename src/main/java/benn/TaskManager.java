@@ -1,5 +1,6 @@
 package benn;
 
+import benn.exceptions.DukeException;
 import benn.tasks.Deadline;
 import benn.tasks.Event;
 import benn.tasks.Task;
@@ -33,16 +34,18 @@ public class TaskManager {
         return tasks.size();
     }
 
-    public Task mark(int index) {
-        Task t = tasks.get(index - 1); // convert to 0-based
-        t.markDone();
-        return t;
+    public Task markAsDone(int index) throws DukeException {
+        int taskNumber = retrieveTaskNumberFrom(index);
+        Task task = tasks.get(taskNumber);
+        task.markAsDone();
+        return task;
     }
 
-    public Task unmark(int index) {
-        Task t = tasks.get(index - 1);
-        t.markNotDone();
-        return t;
+    public Task unmarkAsDone(int index) throws DukeException {
+        int taskNumber = retrieveTaskNumberFrom(index);
+        Task task = tasks.get(taskNumber);
+        task.unmarkAsDone();
+        return task;
     }
 
     @Override
@@ -56,5 +59,14 @@ public class TaskManager {
             sb.append("     ").append(i + 1).append(". ").append(task).append("\n");
         }
         return sb.toString();
+    }
+
+    private int retrieveTaskNumberFrom(int index) throws DukeException {
+        if (index < 1) {
+            throw new DukeException("Invalid index; index must be >= 1");
+        } else if (index > this.tasks.size()) {
+            throw new DukeException("Invalid index; index must be <= " + this.tasks.size());
+        }
+        return index - 1;
     }
 }

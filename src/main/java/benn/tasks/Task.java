@@ -1,7 +1,7 @@
 package benn.tasks;
 
 public abstract class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -9,16 +9,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void markDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    public void markNotDone() {
+    public void unmarkAsDone() {
         this.isDone = false;
-    }
-
-    public String getAdditionalDetails() {
-        return "";
     }
 
     @Override

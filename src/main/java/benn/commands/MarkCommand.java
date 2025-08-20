@@ -1,6 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
+import benn.exceptions.DukeException;
 import benn.patterns.InputPattern;
 import benn.tasks.Task;
 
@@ -17,16 +18,16 @@ public class MarkCommand extends Command{
     public String execute(TaskManager taskManager) {
         Pattern pattern = Pattern.compile(InputPattern.MARK_TASK);
         Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
+        try {
             int index = Integer.parseInt(matcher.group("index"));
-            Task task = taskManager.mark(index);
+            Task task = taskManager.markAsDone(index);
             return "    ____________________________________________________________\n"
                     + "     Nice! I've marked this task as done:\n"
                     + "       " + task + "\n"
                     + "    ____________________________________________________________";
-        } else {
+        } catch (NumberFormatException | DukeException exception){
             return "    ____________________________________________________________\n" +
-                    "   parsing error occurred"  + "\n" +
+                    exception.getMessage() + "\n" +
                     "    ____________________________________________________________";
         }
     }
