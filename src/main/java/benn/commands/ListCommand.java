@@ -1,5 +1,8 @@
 package benn.commands;
 
+import benn.TaskManager;
+import benn.tasks.Task;
+
 public class ListCommand extends Command {
     public ListCommand(String input) {
         this.input = input;
@@ -7,11 +10,9 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        String output =
-                "    ____________________________________________________________\n" +
-                "     list\n" +
-                "    ____________________________________________________________";
-        return output;
+    public String execute(TaskManager taskManager) {
+        return "    ____________________________________________________________\n"
+                + taskManager
+                + "    ____________________________________________________________";
     }
 }

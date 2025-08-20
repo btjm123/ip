@@ -19,13 +19,14 @@ public class Benn {
         System.out.println("____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager();
         boolean shouldExit = false;
 
         while (!shouldExit && sc.hasNextLine()) {
             String input = sc.nextLine().trim();
 
             Command command = Parser.parse(input);
-            String output = command.execute();
+            String output = command.execute(taskManager);
             System.out.println(output);
 
             shouldExit = command.shouldExit();

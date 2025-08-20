@@ -1,5 +1,7 @@
 package benn.commands;
 
+import benn.TaskManager;
+
 public class InvalidCommand extends Command {
     public InvalidCommand(String input) {
         this.input = input;
@@ -7,11 +9,9 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        String output =
-                "    ____________________________________________________________\n" +
-                        "     invalid command, please try again!\n" +
-                        "    ____________________________________________________________";
-        return output;
+    public String execute(TaskManager taskManager) {
+        return "    ____________________________________________________________\n" +
+                "     invalid command, please try again!\n" +
+                "    ____________________________________________________________";
     }
 }
