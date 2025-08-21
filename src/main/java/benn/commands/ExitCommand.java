@@ -1,6 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
+import benn.messages.MessageManager;
 
 public class ExitCommand extends Command {
     public ExitCommand(String input) {
@@ -10,8 +11,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(TaskManager taskManager) {
-        return "    ____________________________________________________________\n" +
-                "     bye, hope to see you soon!\n" +
-                "    ____________________________________________________________";
+        return MessageManager.retrieveByeMessage();
     }
 }

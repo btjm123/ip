@@ -1,7 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
-import benn.tasks.Task;
+import benn.messages.MessageManager;
 
 public class ListCommand extends Command {
     public ListCommand(String input) {
@@ -11,8 +11,6 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskManager taskManager) {
-        return "    ____________________________________________________________\n"
-                + taskManager
-                + "    ____________________________________________________________";
+        return MessageManager.retrieveListMessageFrom(taskManager);
     }
 }
