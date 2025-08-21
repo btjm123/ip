@@ -8,12 +8,12 @@ import java.util.Scanner;
 public class Benn {
     public static void main(String[] args) {
         System.out.println(MessageManager.retrieveIntroductionMessage());
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         boolean shouldExit = false;
 
-        while (!shouldExit && sc.hasNextLine()) {
-            String input = sc.nextLine().trim();
+        while (!shouldExit && scanner.hasNextLine()) {
+            String input = scanner.nextLine().trim();
 
             Command command = Parser.parse(input);
             String output = command.execute(taskManager);
@@ -22,6 +22,6 @@ public class Benn {
             shouldExit = command.shouldExit();
         }
 
-        sc.close();
+        scanner.close();
     }
 }

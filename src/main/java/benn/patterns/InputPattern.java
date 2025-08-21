@@ -10,6 +10,7 @@ public final class InputPattern {
     public static final Pattern ADD_EVENT = Pattern.compile("(?i)^\\s*event\\s+(?<description>.+?)\\s*/from\\s+(?<startDateTime>.+?)\\s*/to\\s+(?<endDateTime>.+)\\s*$");
     public static final Pattern MARK_TASK = Pattern.compile("(?i)^\\s*mark\\s+(?<index>\\d+)\\s*$");
     public static final Pattern UNMARK_TASK = Pattern.compile("(?i)^\\s*unmark\\s+(?<index>\\d+)\\s*$");
+    public static final Pattern DELETE_TASK = Pattern.compile("(?i)^\\s*delete\\s+(?<index>\\d+)\\s*$");
     public static final Pattern BYE = Pattern.compile("(?i)^\\s*bye\\s*$");
 }
 

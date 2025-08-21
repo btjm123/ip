@@ -59,10 +59,17 @@ public class MessageManager {
                 + "    ____________________________________________________________";
     }
 
+    public static String retrieveDeletedTaskMessageFrom(Task task, TaskManager taskManager) {
+        return "    ____________________________________________________________\n"
+                + "     Noted. I've removed this task:\n"
+                + "       " + task + "\n"
+                + "     Now you have " + taskManager.size() + " tasks in the list.\n"
+                + "    ____________________________________________________________";
+    }
+
     public static String retrieveErrorMessageFrom(Exception exception) {
         return "    ____________________________________________________________\n" +
                 exception.getMessage() + "\n" +
                 "    ____________________________________________________________";
     }
-
 }

@@ -48,6 +48,11 @@ public class TaskManager {
         return task;
     }
 
+    public Task deleteTaskAt(int index) throws DukeException {
+        int taskNumber = retrieveTaskNumberFrom(index);
+        return tasks.remove(taskNumber);
+    }
+
     @Override
     public String toString() {
         if (tasks.isEmpty()) {

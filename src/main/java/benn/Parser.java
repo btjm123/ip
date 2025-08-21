@@ -19,6 +19,8 @@ public class Parser {
             return new MarkCommand(input);
         } else if (InputPattern.UNMARK_TASK.matcher(input).matches()) {
             return new UnmarkCommand(input);
+        } else if (InputPattern.DELETE_TASK.matcher(input).matches()) {
+            return new DeleteCommand(input);
         } else if (InputPattern.BYE.matcher(input).matches()) {
             return new ExitCommand(input);
         } else {
