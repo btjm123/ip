@@ -6,6 +6,7 @@ import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Task;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class DeleteCommand extends Command {
@@ -25,7 +26,7 @@ public class DeleteCommand extends Command {
             } else {
                 throw new DukeException("Parsing error occurred");
             }
-        } catch (NumberFormatException | DukeException exception){
+        } catch (NumberFormatException | DukeException | IOException exception){
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

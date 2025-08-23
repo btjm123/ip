@@ -6,6 +6,7 @@ import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Todo;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class AddTodoCommand extends Command {
@@ -25,7 +26,7 @@ public class AddTodoCommand extends Command {
             } else {
                 throw new DukeException("Parsing error occurred");
             }
-        } catch (DukeException exception) {
+        } catch (DukeException | IOException exception) {
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

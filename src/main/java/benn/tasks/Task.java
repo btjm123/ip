@@ -2,11 +2,10 @@ package benn.tasks;
 
 public abstract class Task {
     private final String description;
-    private boolean isDone;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     public void markAsDone() {
@@ -16,6 +15,16 @@ public abstract class Task {
     public void unmarkAsDone() {
         this.isDone = false;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public abstract String toStorageFormat();
 
     @Override
     public String toString() {

@@ -3,8 +3,6 @@ package benn;
 import benn.commands.*;
 import benn.patterns.InputPattern;
 
-import java.util.regex.Matcher;
-
 public class Parser {
     public static Command parse(String input) {
         if (InputPattern.ADD_TODO.matcher(input).matches()) {
