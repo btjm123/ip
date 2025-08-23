@@ -1,4 +1,4 @@
-package benn;
+package benn.storage;
 
 import benn.exceptions.BennException;
 import benn.patterns.TaskStoragePattern;

@@ -1,6 +1,6 @@
 package benn.commands;
 
-import benn.TaskManager;
+import benn.tasks.TaskManager;
 import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 import benn.patterns.InputPattern;

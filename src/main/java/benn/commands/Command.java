@@ -1,6 +1,6 @@
 package benn.commands;
 
-import benn.TaskManager;
+import benn.tasks.TaskManager;
 
 public abstract class Command {
     protected boolean shouldExit;

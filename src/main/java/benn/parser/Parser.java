@@ -1,4 +1,4 @@
-package benn;
+package benn.parser;
 
 import benn.commands.*;
 import benn.patterns.InputPattern;

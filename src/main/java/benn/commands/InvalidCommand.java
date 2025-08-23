@@ -1,6 +1,6 @@
 package benn.commands;
 
-import benn.TaskManager;
+import benn.tasks.TaskManager;
 import benn.messages.MessageManager;
 
 public class InvalidCommand extends Command {
