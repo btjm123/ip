@@ -1,6 +1,7 @@
 package benn;
 
 import benn.exceptions.BennException;
+import benn.storage.TaskStorage;
 import benn.tasks.Deadline;
 import benn.tasks.Event;
 import benn.tasks.Task;
