@@ -30,4 +30,5 @@ delete 2
 list
 delete 3
 list
+list
 bye
