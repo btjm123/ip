@@ -6,6 +6,7 @@ import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Event;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class AddEventCommand extends Command {
@@ -27,7 +28,7 @@ public class AddEventCommand extends Command {
             } else {
                 throw new DukeException("Parsing error occurred");
             }
-        } catch (DukeException exception) {
+        } catch (DukeException | IOException exception) {
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

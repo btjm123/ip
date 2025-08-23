@@ -1,27 +1,32 @@
 package benn;
 
 import benn.commands.Command;
+import benn.exceptions.DukeException;
 import benn.messages.MessageManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Benn {
     public static void main(String[] args) {
         System.out.println(MessageManager.retrieveIntroductionMessage());
         Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
-        boolean shouldExit = false;
+        try {
+            TaskManager taskManager = new TaskManager();
+            boolean shouldExit = false;
 
-        while (!shouldExit && scanner.hasNextLine()) {
-            String input = scanner.nextLine().trim();
+            while (!shouldExit && scanner.hasNextLine()) {
+                String input = scanner.nextLine().trim();
 
-            Command command = Parser.parse(input);
-            String output = command.execute(taskManager);
-            System.out.println(output);
+                Command command = Parser.parse(input);
+                String output = command.execute(taskManager);
+                System.out.println(output);
 
-            shouldExit = command.shouldExit();
+                shouldExit = command.shouldExit();
+            }
+        } catch (DukeException | IOException exception) {
+            System.out.println(MessageManager.retrieveErrorMessageFrom(exception));
         }
-
         scanner.close();
     }
 }

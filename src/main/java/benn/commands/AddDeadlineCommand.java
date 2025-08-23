@@ -6,6 +6,7 @@ import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Deadline;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class AddDeadlineCommand extends Command {
@@ -26,7 +27,7 @@ public class AddDeadlineCommand extends Command {
             } else {
                 throw new DukeException("Parsing error occurred");
             }
-        } catch (DukeException exception) {
+        } catch (DukeException | IOException exception) {
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }
