@@ -1,11 +1,7 @@
-package benn;
+package benn.tasks;
 
 import benn.exceptions.BennException;
 import benn.storage.TaskStorage;
-import benn.tasks.Deadline;
-import benn.tasks.Event;
-import benn.tasks.Task;
-import benn.tasks.Todo;
 
 import java.io.IOException;
 

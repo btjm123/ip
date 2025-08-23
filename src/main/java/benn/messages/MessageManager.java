@@ -1,6 +1,6 @@
 package benn.messages;
 
-import benn.TaskManager;
+import benn.tasks.TaskManager;
 import benn.tasks.Task;
 
 public class MessageManager {

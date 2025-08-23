@@ -1,8 +1,8 @@
 package benn;
 
-import benn.commands.Command;
 import benn.exceptions.BennException;
 import benn.messages.MessageManager;
+import benn.tasks.TaskManager;
 import benn.ui.Ui;
 
 import java.io.IOException;

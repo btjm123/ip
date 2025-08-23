@@ -1,7 +1,7 @@
 package benn.ui;
 
-import benn.Parser;
-import benn.TaskManager;
+import benn.parser.Parser;
+import benn.tasks.TaskManager;
 import benn.commands.Command;
 import benn.exceptions.BennException;
 import benn.messages.MessageManager;
