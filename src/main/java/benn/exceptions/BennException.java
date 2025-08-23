@@ -1,7 +1,7 @@
 package benn.exceptions;
 
-public class DukeException extends Exception {
-    public DukeException(String message) {
+public class BennException extends Exception {
+    public BennException(String message) {
         super(message);
     }
 

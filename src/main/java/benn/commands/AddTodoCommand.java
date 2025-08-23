@@ -1,7 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Todo;
@@ -24,9 +24,9 @@ public class AddTodoCommand extends Command {
                 Todo todo = taskManager.addTodo(description);
                 return MessageManager.retrieveTaskMessageFrom(todo, taskManager);
             } else {
-                throw new DukeException("Parsing error occurred");
+                throw new BennException("Parsing error occurred");
             }
-        } catch (DukeException | IOException exception) {
+        } catch (BennException | IOException exception) {
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

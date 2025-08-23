@@ -14,16 +14,16 @@ public class MessageManager {
 
         return logo
                 + "____________________________________________________________\n"
-                + " Hello! I'm BENN\n"
-                + " What can I do for you?\n"
+                + "Hello! I'm BENN\n"
+                + "What can I do for you?\n"
                 + "____________________________________________________________";
     }
 
     public static String retrieveTaskMessageFrom(Task task, TaskManager taskManager) {
         return "____________________________________________________________\n"
-                + " Got it. I've added this task:\n"
+                + "Got it. I've added this task:\n"
                 + "   " + task + "\n"
-                + " Now you have " + taskManager.size() + " tasks in the list.\n"
+                + "Now you have " + taskManager.size() + " tasks in the list.\n"
                 + "____________________________________________________________";
     }
 
@@ -35,35 +35,35 @@ public class MessageManager {
 
     public static String retrieveByeMessage() {
         return "____________________________________________________________\n"
-                + " bye, hope to see you soon!\n"
+                + "bye, hope to see you soon!\n"
                 + "____________________________________________________________";
     }
 
     public static String retrieveInvalidCommandMessage() {
         return "____________________________________________________________\n"
-                + " invalid command, please try again!\n"
+                + "invalid command, please try again!\n"
                 + "____________________________________________________________";
     }
 
     public static String retrieveMarkTaskAsDoneMessageFrom(Task task) {
         return "____________________________________________________________\n"
-                + " Nice! I've marked this task as done:\n"
-                + "   " + task + "\n"
+                + "Nice! I've marked this task as done:\n"
+                + task + "\n"
                 + "____________________________________________________________";
     }
 
     public static String retrieveUnmarkTaskAsDoneMessageFrom(Task task) {
         return "____________________________________________________________\n"
-                + " Nice! I've unmarked this task as done:\n"
-                + "   " + task + "\n"
+                + "Nice! I've unmarked this task as done:\n"
+                + task + "\n"
                 + "____________________________________________________________";
     }
 
     public static String retrieveDeletedTaskMessageFrom(Task task, TaskManager taskManager) {
         return "____________________________________________________________\n"
-                + " Noted. I've removed this task:\n"
-                + "   " + task + "\n"
-                + " Now you have " + taskManager.size() + " tasks in the list.\n"
+                + "Noted. I've removed this task:\n"
+                + task + "\n"
+                + "Now you have " + taskManager.size() + " tasks in the list.\n"
                 + "____________________________________________________________";
     }
 

@@ -1,7 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Deadline;
@@ -25,9 +25,9 @@ public class AddDeadlineCommand extends Command {
                 Deadline deadline = taskManager.addDeadline(description, dateTimeDue);
                 return MessageManager.retrieveTaskMessageFrom(deadline, taskManager);
             } else {
-                throw new DukeException("Parsing error occurred");
+                throw new BennException("Parsing error occurred");
             }
-        } catch (DukeException | IOException exception) {
+        } catch (BennException | IOException exception) {
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

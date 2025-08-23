@@ -1,7 +1,6 @@
 package benn;
 
-import benn.exceptions.DukeException;
-import benn.messages.MessageManager;
+import benn.exceptions.BennException;
 import benn.patterns.TaskStoragePattern;
 import benn.tasks.Deadline;
 import benn.tasks.Event;
@@ -24,10 +23,10 @@ public class TaskStorage {
         this.tasks = tasks;
     }
 
-    public static TaskStorage start() throws IOException, DukeException {
+    public static TaskStorage start() throws IOException, BennException {
         File taskStorage = new File(TASK_STORAGE_PATH);
         if (taskStorage.isDirectory()) {
-            throw new DukeException("Directory detected, can't create task storage file!");
+            throw new BennException("Directory detected, can't create task storage file!");
         } else if (taskStorage.exists() && taskStorage.isFile()) {
             return TaskStorage.loadFromExisting(taskStorage);
         } else {
@@ -61,7 +60,7 @@ public class TaskStorage {
         return new TaskStorage(new ArrayList<>());
     }
 
-    private static TaskStorage loadFromExisting(File file) throws IOException, DukeException {
+    private static TaskStorage loadFromExisting(File file) throws IOException, BennException {
         List<Task> taskList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file);
              Scanner scanner = new Scanner(fis, java.nio.charset.StandardCharsets.UTF_8)) {
@@ -86,7 +85,7 @@ public class TaskStorage {
         }
     }
 
-    private static Task parseLine(String line) throws DukeException {
+    private static Task parseLine(String line) throws BennException {
         Matcher matcher;
         if ((matcher = doesPatternMatch(TaskStoragePattern.TODO, line)) != null) {
             String description = matcher.group("description");
@@ -112,12 +111,12 @@ public class TaskStorage {
             return new Event(description, from, to, isDone);
         }
 
-        throw new DukeException("Unknown task format: " + line);
+        throw new BennException("Unknown task format: " + line);
     }
 
     private static Matcher doesPatternMatch(Pattern p, String line) {
         Matcher m = p.matcher(line);
-        return m.matches() ? m : null;
+        return m.find() ? m : null;
     }
 
 }

@@ -1,6 +1,6 @@
 package benn;
 
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.tasks.Deadline;
 import benn.tasks.Event;
 import benn.tasks.Task;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class TaskManager {
     private final TaskStorage taskStorage;
 
-    public TaskManager() throws IOException, DukeException {
+    public TaskManager() throws IOException, BennException {
         this.taskStorage = TaskStorage.start();
     }
 
@@ -21,13 +21,13 @@ public class TaskManager {
         return todo;
     }
 
-    public Deadline addDeadline(String description, String datetimeDue) throws IOException {
+    public Deadline addDeadline(String description, String datetimeDue) throws IOException, BennException {
         Deadline deadline = new Deadline(description, datetimeDue, false);
         this.taskStorage.add(deadline);
         return deadline;
     }
 
-    public Event addEvent(String description, String startDateTime, String endDateTime) throws IOException {
+    public Event addEvent(String description, String startDateTime, String endDateTime) throws IOException, BennException {
         Event event = new Event(description, startDateTime, endDateTime, false);
         this.taskStorage.add(event);
         return event;
@@ -37,7 +37,7 @@ public class TaskManager {
         return this.taskStorage.getTaskCount();
     }
 
-    public Task markAsDone(int taskNumber) throws DukeException, IOException {
+    public Task markAsDone(int taskNumber) throws BennException, IOException {
         int index = this.retrieveIndexFrom(taskNumber);
         Task task = this.taskStorage.getTaskLocatedAt(index);
         task.markAsDone();
@@ -45,7 +45,7 @@ public class TaskManager {
         return task;
     }
 
-    public Task unmarkAsDone(int taskNumber) throws DukeException, IOException {
+    public Task unmarkAsDone(int taskNumber) throws BennException, IOException {
         int index = this.retrieveIndexFrom(taskNumber);
         Task task = this.taskStorage.getTaskLocatedAt(index);
         task.unmarkAsDone();
@@ -53,7 +53,7 @@ public class TaskManager {
         return task;
     }
 
-    public Task deleteTaskAt(int taskNumber) throws IOException, DukeException {
+    public Task deleteTaskAt(int taskNumber) throws IOException, BennException {
         int index = retrieveIndexFrom(taskNumber);
         return this.taskStorage.removeTask(index);
     }
@@ -72,12 +72,12 @@ public class TaskManager {
         return sb.toString();
     }
 
-    private int retrieveIndexFrom(int taskNumber) throws DukeException {
+    private int retrieveIndexFrom(int taskNumber) throws BennException {
         int taskCount = this.taskStorage.getTaskCount();
         if (taskNumber < 1) {
-            throw new DukeException("Invalid index; index must be >= 1");
+            throw new BennException("Invalid index; index must be >= 1");
         } else if (taskNumber > taskCount) {
-            throw new DukeException("Invalid index; index must be <= " + taskCount);
+            throw new BennException("Invalid index; index must be <= " + taskCount);
         }
         return taskNumber - 1;
     }

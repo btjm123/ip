@@ -1,7 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Task;
@@ -24,9 +24,9 @@ public class UnmarkCommand extends Command{
                 Task task = taskManager.unmarkAsDone(index);
                 return MessageManager.retrieveUnmarkTaskAsDoneMessageFrom(task);
             } else {
-                throw new DukeException("Parsing error occurred");
+                throw new BennException("Parsing error occurred");
             }
-        } catch (NumberFormatException | DukeException | IOException exception){
+        } catch (NumberFormatException | BennException | IOException exception){
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }

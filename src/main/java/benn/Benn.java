@@ -1,7 +1,7 @@
 package benn;
 
 import benn.commands.Command;
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class Benn {
 
                 shouldExit = command.shouldExit();
             }
-        } catch (DukeException | IOException exception) {
+        } catch (BennException | IOException exception) {
             System.out.println(MessageManager.retrieveErrorMessageFrom(exception));
         }
         scanner.close();

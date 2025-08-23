@@ -1,7 +1,7 @@
 package benn.commands;
 
 import benn.TaskManager;
-import benn.exceptions.DukeException;
+import benn.exceptions.BennException;
 import benn.messages.MessageManager;
 import benn.patterns.InputPattern;
 import benn.tasks.Task;
@@ -24,9 +24,9 @@ public class DeleteCommand extends Command {
                 Task task = taskManager.deleteTaskAt(index);
                 return MessageManager.retrieveDeletedTaskMessageFrom(task, taskManager);
             } else {
-                throw new DukeException("Parsing error occurred");
+                throw new BennException("Parsing error occurred");
             }
-        } catch (NumberFormatException | DukeException | IOException exception){
+        } catch (NumberFormatException | BennException | IOException exception){
             return MessageManager.retrieveErrorMessageFrom(exception);
         }
     }
