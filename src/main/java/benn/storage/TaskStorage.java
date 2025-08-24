@@ -96,7 +96,9 @@ public class TaskStorage {
 
         if ((matcher = doesPatternMatch(TaskStoragePattern.DEADLINE, line)) != null) {
             String description = matcher.group("description");
-            String by = matcher.group("by");
+            System.out.println("anton" + matcher.group("by"));
+            String by = matcher.group("by").replace('T', ' ');
+            System.out.println(by);
             String done = matcher.group("done");
             boolean isDone = "1".equals(done);
             return new Deadline(description, by, isDone);
@@ -104,8 +106,8 @@ public class TaskStorage {
 
         if ((matcher = doesPatternMatch(TaskStoragePattern.EVENT, line)) != null) {
             String description = matcher.group("description");
-            String from = matcher.group("from");
-            String to = matcher.group("to");
+            String from = matcher.group("from").replace('T', ' ');
+            String to = matcher.group("to").replace('T', ' ');
             String done = matcher.group("done");
             boolean isDone = "1".equals(done);
             return new Event(description, from, to, isDone);

@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete the temporary_datastore directory if it exists
+if [ -d "./temporary_datastore" ]
+then
+    rm -rf ./temporary_datastore
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -Xlint:none -d ../bin $(find ../src/main/java -name "*.java");
 then

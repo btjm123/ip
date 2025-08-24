@@ -12,18 +12,20 @@ public class Deadline extends Task {
     public Deadline(String description, String datetimeDue, boolean isDone) throws BennException {
         super(description);
         try {
-            this.datetimeDue = parseDateTime(datetimeDue.split(" "));
+            System.out.println("in deadline ctor" + datetimeDue);
+            this.datetimeDue = parseDateTime(datetimeDue);
         } catch (DateTimeParseException exception) {
             throw new BennException("Invalid date received!");
         }
         this.isDone = isDone;
     }
 
-    private static LocalDateTime parseDateTime(String[] datetimeParts) throws BennException {
-        if (datetimeParts == null || datetimeParts.length != 2) {
+    private static LocalDateTime parseDateTime(String datetimeDue) throws BennException {
+        String[] parts = datetimeDue == null ? null : datetimeDue.trim().split("\\s+");
+        if (parts == null || parts.length != 2) {
             throw new BennException("Datetime must have exactly [date, time].");
         }
-        String dateTimeString = datetimeParts[0] + "T" + datetimeParts[1];
+        String dateTimeString = parts[0] + "T" + parts[1];
         return LocalDateTime.parse(dateTimeString, formatter);
     }
 
@@ -34,6 +36,6 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageFormat() {
-        return String.format("D | %d | %s | %s", this.getIsDone() ? 1 : 0, this.getDescription(), formatter.format(datetimeDue));
+        return String.format("D | %d | %s | %s", this.getIsDone() ? 1 : 0, this.getDescription(), this.datetimeDue.format(formatter));
     }
 }
