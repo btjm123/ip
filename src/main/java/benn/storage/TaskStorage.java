@@ -14,6 +14,21 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the persistent storage of tasks in Benn the Chatbot.
+ *
+ * <p>The {@code TaskStorage} class is responsible for loading tasks
+ * from a save file at startup, writing tasks to disk whenever the
+ * task list changes, and providing helper methods to add, remove,
+ * or retrieve tasks. The storage format is line-based, with each
+ * line describing a single task in a pipe-delimited form defined
+ * by {@link benn.patterns.TaskStoragePattern}.</p>
+ *
+ * <p>The save file is stored at {@code ./temporary_datastore/tasks.txt}.
+ * If the file or its parent directory does not exist, they will be
+ * created automatically. If the path points to a directory instead of
+ * a file, a {@link benn.exceptions.BennException} is thrown.</p>
+ */
 public class TaskStorage {
     private static final String TASK_STORAGE_PATH = "./temporary_datastore/tasks.txt";
 
@@ -23,6 +38,14 @@ public class TaskStorage {
         this.tasks = tasks;
     }
 
+    /**
+     * Initializes the storage system. Loads tasks if the save file already
+     * exists, or creates a new save file otherwise.
+     *
+     * @return a {@code TaskStorage} object representing the loaded or new state
+     * @throws IOException if the file cannot be created or accessed
+     * @throws BennException if the path is invalid (e.g. a directory instead of a file)
+     */
     public static TaskStorage start() throws IOException, BennException {
         File taskStorage = new File(TASK_STORAGE_PATH);
         if (taskStorage.isDirectory()) {
@@ -34,25 +57,58 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Adds a task to the in-memory list and persists the updated list to disk.
+     *
+     * @param task the task to add
+     * @throws IOException if writing to the save file fails
+     */
     public void add(Task task) throws IOException {
         this.tasks.add(task);
         this.flush();
     }
 
+    /**
+     * Retrieves the task at the specified index in the in-memory list.
+     *
+     * @param index the index of the task (0-based)
+     * @return the task at the specified index
+     */
     public Task getTaskLocatedAt(int index) {
         return this.tasks.get(index);
     }
 
-    public Task removeTask(int index) throws IOException {
+    /**
+     * Removes the task at the specified index, persists the updated list
+     * to disk, and returns the removed task.
+     *
+     * @param index the index of the task (0-based)
+     * @return the removed task
+     * @throws IOException if writing to the save file fails
+     */
+    public Task removeTaskLocatedAt(int index) throws IOException {
         Task task = this.tasks.remove(index);
         this.flush();
         return task;
     }
 
+    /**
+     * Returns the number of tasks currently stored in memory.
+     *
+     * @return the number of tasks
+     */
     public int getTaskCount() {
         return this.tasks.size();
     }
 
+    /**
+     * Creates a new storage file at the specified location,
+     * along with any required parent directories.
+     *
+     * @param file the file to create
+     * @return a {@code TaskStorage} initialized with an empty task list
+     * @throws IOException if the file cannot be created
+     */
     private static TaskStorage createNew(File file) throws IOException {
         File parent = file.getParentFile();
         parent.mkdirs();
@@ -60,6 +116,14 @@ public class TaskStorage {
         return new TaskStorage(new ArrayList<>());
     }
 
+    /**
+     * Loads tasks from an existing storage file by parsing each line.
+     *
+     * @param file the file to load tasks from
+     * @return a {@code TaskStorage} initialized with the loaded tasks
+     * @throws IOException if the file cannot be read
+     * @throws BennException if a line in the file cannot be parsed
+     */
     private static TaskStorage loadFromExisting(File file) throws IOException, BennException {
         List<Task> taskList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file);
@@ -73,6 +137,12 @@ public class TaskStorage {
         return new TaskStorage(taskList);
     }
 
+    /**
+     * Writes all tasks from memory to the storage file,
+     * overwriting the previous contents.
+     *
+     * @throws IOException if writing to the save file fails
+     */
     public void flush() throws IOException {
         List<String> lines = this.tasks.stream()
                 .map(Task::toStorageFormat)
@@ -85,6 +155,14 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Parses a line of text into a {@link benn.tasks.Task} object,
+     * based on {@link benn.patterns.TaskStoragePattern}.
+     *
+     * @param line the line of text representing a stored task
+     * @return the parsed {@code Task}
+     * @throws BennException if the line does not match any known task format
+     */
     private static Task parseLine(String line) throws BennException {
         Matcher matcher;
         if ((matcher = doesPatternMatch(TaskStoragePattern.TODO, line)) != null) {
@@ -116,6 +194,13 @@ public class TaskStorage {
         throw new BennException("Unknown task format: " + line);
     }
 
+    /**
+     * Attempts to match the given line against a regex pattern.
+     *
+     * @param p the pattern to test
+     * @param line the line of text to match
+     * @return the matcher if a match is found, or {@code null} otherwise
+     */
     private static Matcher doesPatternMatch(Pattern p, String line) {
         Matcher m = p.matcher(line);
         return m.find() ? m : null;
