@@ -3,7 +3,23 @@ package benn.messages;
 import benn.tasks.TaskManager;
 import benn.tasks.Task;
 
+/**
+ * Utility class that manages all user-facing messages in Benn the Chatbot.
+ *
+ * <p>This class provides static helper methods to construct consistent,
+ * formatted strings for various chatbot interactions, such as greeting
+ * the user, listing tasks, confirming task modifications, and reporting
+ * errors. By centralizing message formatting here, the rest of the
+ * application can focus on logic while ensuring a uniform user interface.</p>
+ */
 public class MessageManager {
+
+    /**
+     * Returns the introduction message, including the ASCII logo
+     * and a greeting to the user.
+     *
+     * @return the chatbot's introduction message
+     */
     public static String retrieveIntroductionMessage() {
         String logo =
                 " ____                      _  _  _\n" +
@@ -19,6 +35,13 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a confirmation message after adding a new task.
+     *
+     * @param task the task that was added
+     * @param taskManager the task manager holding the updated list
+     * @return a formatted string confirming the addition
+     */
     public static String retrieveTaskMessageFrom(Task task, TaskManager taskManager) {
         return "____________________________________________________________\n"
                 + "Got it. I've added this task:\n"
@@ -27,24 +50,48 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns the message that lists all tasks currently managed
+     * by the {@link TaskManager}.
+     *
+     * @param taskManager the task manager containing the tasks
+     * @return a formatted string containing the task list
+     */
     public static String retrieveListMessageFrom(TaskManager taskManager) {
         return "____________________________________________________________\n"
                 + taskManager
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns the farewell message displayed when the chatbot exits.
+     *
+     * @return the exit message
+     */
     public static String retrieveByeMessage() {
         return "____________________________________________________________\n"
                 + "bye, hope to see you soon!\n"
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns the message displayed when the user enters an
+     * invalid command.
+     *
+     * @return the invalid command error message
+     */
     public static String retrieveInvalidCommandMessage() {
         return "____________________________________________________________\n"
                 + "invalid command, please try again!\n"
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a confirmation message after marking a task as done.
+     *
+     * @param task the task that was marked as done
+     * @return a formatted string confirming the operation
+     */
     public static String retrieveMarkTaskAsDoneMessageFrom(Task task) {
         return "____________________________________________________________\n"
                 + "Nice! I've marked this task as done:\n"
@@ -52,6 +99,12 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a confirmation message after unmarking a task as done.
+     *
+     * @param task the task that was unmarked
+     * @return a formatted string confirming the operation
+     */
     public static String retrieveUnmarkTaskAsDoneMessageFrom(Task task) {
         return "____________________________________________________________\n"
                 + "Nice! I've unmarked this task as done:\n"
@@ -59,6 +112,13 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a confirmation message after deleting a task.
+     *
+     * @param task the task that was deleted
+     * @param taskManager the task manager holding the updated list
+     * @return a formatted string confirming the deletion
+     */
     public static String retrieveDeletedTaskMessageFrom(Task task, TaskManager taskManager) {
         return "____________________________________________________________\n"
                 + "Noted. I've removed this task:\n"
@@ -67,6 +127,13 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a message that displays an error reported
+     * by an {@link Exception}.
+     *
+     * @param exception the exception that caused the error
+     * @return a formatted error message string
+     */
     public static String retrieveErrorMessageFrom(Exception exception) {
         return "____________________________________________________________\n"
                 + exception.getMessage() + "\n"
