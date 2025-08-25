@@ -4,6 +4,7 @@ import benn.exceptions.BennException;
 import benn.storage.TaskStorage;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Manages the user's tasks in Benn the Chatbot.
@@ -122,6 +123,22 @@ public class TaskManager {
     public Task deleteTaskAt(int taskNumber) throws IOException, BennException {
         int index = retrieveIndexFrom(taskNumber);
         return this.taskStorage.removeTaskLocatedAt(index);
+    }
+
+    /**
+     * Finds all tasks whose descriptions contain the given keyword
+     * (case-insensitive).
+     *
+     * <p>This method delegates the search to the underlying
+     * {@link benn.storage.TaskStorage}, returning all matching tasks
+     * in the order they appear in storage.</p>
+     *
+     * @param keyword the keyword to search for within task descriptions
+     * @return a list of {@link benn.tasks.Task} objects whose descriptions
+     *         contain the keyword; the list may be empty if no matches are found
+     */
+    public List<Task> findAllTasksContaining(String keyword) {
+        return this.taskStorage.findAllTasksContaining(keyword);
     }
 
     /**
