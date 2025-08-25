@@ -49,15 +49,6 @@ public class Ui implements Closeable {
     }
 
     /**
-     * Prints a line of output to standard output.
-     *
-     * @param s the string to print
-     */
-    private void println(String s) {
-        System.out.println(s);
-    }
-
-    /**
      * Runs the main chatbot loop.
      *
      * <p>This method:
@@ -84,7 +75,7 @@ public class Ui implements Closeable {
             if (input == null) break;
             Command command = Parser.parse(input);
             String output = command.execute(taskManager);
-            println(output);
+            System.out.println(output);
             shouldExit = command.shouldExit();
         }
     }
