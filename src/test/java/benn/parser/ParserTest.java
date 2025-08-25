@@ -146,6 +146,21 @@ class ParserTest {
     }
 
     @Test
+    void parse_find_valid_success() {
+        assertType(Parser.parse("find book"), FindCommand.class);
+        assertType(Parser.parse("  FIND   Book  "), FindCommand.class);
+        assertType(Parser.parse("find read book"), FindCommand.class);
+        assertType(Parser.parse("find 2025-08"), FindCommand.class);
+    }
+
+    @Test
+    void parse_find_missing_keyword_invalid() {
+        assertType(Parser.parse("find"), InvalidCommand.class);
+        assertType(Parser.parse("find    "), InvalidCommand.class);
+        assertType(Parser.parse("  find\t"), InvalidCommand.class);
+    }
+
+    @Test
     void parse_unknown_invalid() {
         assertType(Parser.parse("abracadabra"), InvalidCommand.class);
     }

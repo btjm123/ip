@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Handles the persistent storage of tasks in Benn the Chatbot.
@@ -90,6 +91,22 @@ public class TaskStorage {
         Task task = this.tasks.remove(index);
         this.flush();
         return task;
+    }
+
+    /**
+     * Finds all tasks whose descriptions contain the given keyword.
+     *
+     * <p>The search is case-sensitive and will return tasks in the order
+     * they are currently stored. If no tasks match, an empty list is returned.</p>
+     *
+     * @param keyword the keyword to search for in task descriptions
+     * @return a list of {@link benn.tasks.Task} objects whose descriptions
+     *         contain the keyword; the list may be empty if no matches are found
+     */
+    public List<Task> findAllTasksContaining(String keyword) {
+        return this.tasks.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
     }
 
     /**

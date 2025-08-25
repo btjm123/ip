@@ -3,6 +3,8 @@ package benn.messages;
 import benn.tasks.TaskManager;
 import benn.tasks.Task;
 
+import java.util.List;
+
 /**
  * Utility class that manages all user-facing messages in Benn the Chatbot.
  *
@@ -125,6 +127,35 @@ public class MessageManager {
                 + task + "\n"
                 + "Now you have " + taskManager.size() + " tasks in the list.\n"
                 + "____________________________________________________________";
+    }
+
+    /**
+     * Returns a formatted message displaying all tasks that match a search keyword.
+     *
+     * <p>If the provided list of tasks is empty, a placeholder message indicating
+     * no matches is included. Otherwise, each task is displayed with its
+     * 1-based index and formatted string representation.</p>
+     *
+     * <p>The message is enclosed within divider lines for consistency with
+     * other chatbot outputs.</p>
+     *
+     * @param matches the list of tasks whose descriptions matched the keyword
+     * @return a formatted string containing the search results or a no-matches notice
+     */
+    public static String retrieveFindMessageFrom(List<Task> matches) {
+        String result = "____________________________________________________________\n";
+        result += "Here are the matching tasks in your list:\n";
+
+        if (matches.isEmpty()) {
+            result += "(no matching tasks)\n";
+        } else {
+            for (int i = 0; i < matches.size(); i++) {
+                result += (i + 1) + "." + matches.get(i) + "\n";
+            }
+        }
+
+        result += "____________________________________________________________";
+        return result;
     }
 
     /**
