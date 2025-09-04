@@ -65,7 +65,7 @@ public class ChatBubble extends HBox {
      * @param icon user avatar image
      * @return a ChatBubble for the user
      */
-    public static ChatBubble fromUser(String text, Image icon) {
+    public static ChatBubble getUserDialog(String text, Image icon) {
         return new ChatBubble(text, icon);
     }
 
@@ -76,7 +76,7 @@ public class ChatBubble extends HBox {
      * @param icon bot avatar image
      * @return a ChatBubble for the bot
      */
-    public static ChatBubble fromBot(String text, Image icon) {
+    public static ChatBubble getDukeDialog(String text, Image icon) {
         ChatBubble bubble = new ChatBubble(text, icon);
         bubble.invert();
         return bubble;
