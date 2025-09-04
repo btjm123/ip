@@ -1,45 +1,57 @@
 package benn;
 
-import benn.exceptions.BennException;
-import benn.messages.MessageManager;
-import benn.tasks.TaskManager;
-import benn.ui.Ui;
-
 import java.io.IOException;
 
+import benn.commands.Command;
+import benn.commands.InitializationCommand;
+import benn.commands.InitializationCommand;
+import benn.exceptions.BennException;
+import benn.parser.Parser;
+import benn.tasks.TaskManager;
+
 /**
- * The entry point for Benn the Chatbot.
- *
- * <p>The {@code Benn} class initializes the chatbot by creating the
- * {@link benn.ui.Ui} for user interaction and the {@link benn.tasks.TaskManager}
- * for managing tasks. It then runs the chatbot loop until the user exits.</p>
- *
- * <p>If any {@link benn.exceptions.BennException} or {@link java.io.IOException}
- * occurs during initialization or execution, an error message is displayed
- * to the user via {@link benn.messages.MessageManager}.</p>
+ * Represents a benn.
  */
 public class Benn {
+    private TaskManager taskManager;
+    private boolean shouldExit;
 
     /**
-     * Launches the chatbot application.
-     *
-     * <p>Steps performed:</p>
-     * <ol>
-     *     <li>Create a {@link benn.ui.Ui} instance to handle input/output</li>
-     *     <li>Create a {@link benn.tasks.TaskManager} to manage tasks</li>
-     *     <li>Run the chatbot main loop</li>
-     *     <li>Gracefully handle exceptions by displaying user-friendly error messages</li>
-     * </ol>
-     *
-     * @param args command-line arguments (not used)
+     * Initializes the logic unit behind benn.
      */
-    public static void main(String[] args) {
-        try (Ui ui = new Ui()) {
-            TaskManager taskManager = new TaskManager();
-            ui.run(taskManager);
-        } catch (BennException | IOException e) {
-            System.out.println(MessageManager.retrieveErrorMessageFrom(e));
+    public Benn() {
+        try {
+            this.taskManager = new TaskManager();
+        } catch (BennException | IOException exception) {
+            System.out.println(exception.getMessage());
+            this.taskManager = null;
         }
     }
-}
 
+    /**
+     * Returns the response after executing the command
+     * associated with the user input.
+     *
+     * @param input User input
+     * @return Response from execution of the command
+     */
+    public String getResponse(String input) {
+        Command command = Parser.parse(input);
+        String response = command.execute(taskManager);
+        this.shouldExit = command.shouldExit();
+        return response;
+    }
+
+    public boolean isExit() {
+        return shouldExit;
+    }
+
+    /**
+     * Returns the message for when benn welcomes the user.
+     * @return Welcome message in String.
+     */
+    public String getWelcome() {
+        Command command = new InitializationCommand("");
+        return command.execute(taskManager);
+    }
+}
