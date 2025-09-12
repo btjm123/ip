@@ -51,6 +51,8 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (InputPattern.FIND_ALL_TASKS_CONTAINING_KEYWORD.matcher(input).matches()) {
             return new FindCommand(input);
+        } else if (InputPattern.HELP.matcher(input).matches()) {
+            return new HelpCommand(input);
         } else if (InputPattern.BYE.matcher(input).matches()) {
             return new ExitCommand(input);
         } else {

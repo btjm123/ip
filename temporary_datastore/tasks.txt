@@ -1,7 +1,0 @@
-T | 0 | read book
-D | 0 | date anton      | 21/03/2002T14:00
-T | 0 | /g
-T | 0 | anton
-T | 0 | anton
-T | 0 | list
-T | 0 | anton
