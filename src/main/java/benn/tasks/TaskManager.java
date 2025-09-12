@@ -159,7 +159,11 @@ public class TaskManager {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskCount; i++) {
             Task task = this.taskStorage.getTaskLocatedAt(i);
-            sb.append("     ").append(i + 1).append(". ").append(task).append("\n");
+            sb.append("     ")
+                    .append(i + 1)
+                    .append(". ")
+                    .append(task)
+                    .append("\n");
         }
         return sb.toString();
     }
