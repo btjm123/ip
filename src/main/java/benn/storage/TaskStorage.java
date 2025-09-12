@@ -79,6 +79,8 @@ public class TaskStorage {
      * @return the task at the specified index
      */
     public Task getTaskLocatedAt(int index) {
+        assert index >= 0 && index < this.tasks.size()
+                : "TaskStorage.getTaskLocatedAt: index out of bounds";
         return this.tasks.get(index);
     }
 
@@ -91,6 +93,8 @@ public class TaskStorage {
      * @throws IOException if writing to the save file fails
      */
     public Task removeTaskLocatedAt(int index) throws IOException {
+        assert index >= 0 && index < this.tasks.size()
+                : "TaskStorage.removeTaskLocatedAt: index out of bounds";
         Task task = this.tasks.remove(index);
         this.flush();
         return task;
@@ -107,6 +111,7 @@ public class TaskStorage {
      *         contain the keyword; the list may be empty if no matches are found
      */
     public List<Task> findAllTasksContaining(String keyword) {
+        assert keyword != null : "TaskStorage.findAllTasksContaining: keyword must not be null";
         return this.tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .collect(Collectors.toList());
