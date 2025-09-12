@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import benn.commands.Command;
 import benn.commands.InitializationCommand;
-import benn.commands.InitializationCommand;
 import benn.exceptions.BennException;
 import benn.parser.Parser;
 import benn.tasks.TaskManager;

@@ -171,4 +171,50 @@ public class MessageManager {
                 + "____________________________________________________________";
     }
 
+    /**
+     * Returns a message that displays usage help for the user.
+     *
+     * @return a formatted help message string
+     */
+    public static String retrieveHelpMessage() {
+        return "____________________________________________________________\n"
+                + "Here are the available commands:\n"
+                + "\n"
+                + "  list\n"
+                + "      Show all tasks in the list.\n"
+                + "\n"
+                + "  todo DESCRIPTION\n"
+                + "      Add a todo task.\n"
+                + "\n"
+                + "  deadline DESCRIPTION /by DD/MM/YYYY HH:MM\n"
+                + "      Add a deadline task.\n"
+                + "      Example: deadline submit report /by 25/12/2025 23:59\n"
+                + "\n"
+                + "  event DESCRIPTION /from DD/MM/YYYY HH:MM /to DD/MM/YYYY HH:MM\n"
+                + "      Add an event task.\n"
+                + "      Example: event project meeting /from 20/09/2025 14:00 /to 20/09/2025 16:00\n"
+                + "\n"
+                + "  mark INDEX\n"
+                + "      Mark the task at INDEX as done.\n"
+                + "\n"
+                + "  unmark INDEX\n"
+                + "      Mark the task at INDEX as not done.\n"
+                + "\n"
+                + "  delete INDEX\n"
+                + "      Delete the task at INDEX.\n"
+                + "\n"
+                + "  find KEYWORD\n"
+                + "      Find all tasks containing KEYWORD.\n"
+                + "\n"
+                + "  bye\n"
+                + "      Exit the program.\n"
+                + "\n"
+                + "  help\n"
+                + "      Show this help message.\n"
+                + "____________________________________________________________";
+    }
+
+
+
+
 }

@@ -44,6 +44,7 @@ public final class InputPattern {
     public static final Pattern UNMARK_TASK = Pattern.compile("(?i)^\\s*unmark\\s+(?<index>\\d+)\\s*$");
     public static final Pattern DELETE_TASK = Pattern.compile("(?i)^\\s*delete\\s+(?<index>\\d+)\\s*$");
     public static final Pattern FIND_ALL_TASKS_CONTAINING_KEYWORD = Pattern.compile("(?i)^\\s*find\\s+(?<keyword>(?!\\s*$).+)\\s*$");
+    public static final Pattern HELP = Pattern.compile("^help$");
     public static final Pattern BYE = Pattern.compile("(?i)^\\s*bye\\s*$");
 }
 
