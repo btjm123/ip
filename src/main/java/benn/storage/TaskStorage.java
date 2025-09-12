@@ -7,7 +7,10 @@ import benn.tasks.Event;
 import benn.tasks.Task;
 import benn.tasks.Todo;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -191,9 +194,7 @@ public class TaskStorage {
 
         if ((matcher = doesPatternMatch(TaskStoragePattern.DEADLINE, line)) != null) {
             String description = matcher.group("description");
-            System.out.println("anton" + matcher.group("by"));
             String by = matcher.group("by").replace('T', ' ');
-            System.out.println(by);
             String done = matcher.group("done");
             boolean isDone = "1".equals(done);
             return new Deadline(description, by, isDone);
