@@ -1,30 +1,47 @@
-# benn.Benn User Guide
+# Benn User Guide
 
-// Update the title above to match the actual product name
+Benn is a chatbot built with Java designed to help you to manage your tasks
 
-// Product screenshot goes here
+## Features
+- List all the tasks
+- Add a task to the list
+- Mark & unmark a task
+- Persist tasks to file on disk
+- Restore tasks from a file on disk
+- Delete a task by index
+- Search for a task using a keyword
 
-// Product intro goes here
 
-## Adding deadlines
+## Other stuff to know
+- The first word of the input is the command
+- Available commands
+    - todo
+    - deadline
+    - event
+    - find
+    - list
+    - delete
+    - mark
+    - unmark
+    - help
+- Benn was built with Java 17
 
-// Describe the action and its outcome.
+## Usage
 
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+1. Clone the repository
 
 ```
-expected output
+git clone https://github.com/btjm123/ip.git
 ```
 
-## Feature ABC
+2. Build Benn
 
-// Feature details
+```
+./gradlew shadowJar
+```
 
+3. Run Benn
 
-## Feature XYZ
-
-// Feature details
+```
+java -jar ./build/libs/benn.jar
+```
